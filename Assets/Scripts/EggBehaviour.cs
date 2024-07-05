@@ -28,7 +28,8 @@ public class EggBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Plane" || collision.gameObject.tag == "WayPoint")
+        //collision.gameObject.tag == "WayPoint"
+        if (collision.gameObject.tag == "Plane")
             Destroy(gameObject);
     }
 

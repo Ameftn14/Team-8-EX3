@@ -6,6 +6,7 @@ public class PlaneBehaviour : MonoBehaviour
 {
     public EnemyManager myEnemyManager = null;
     private int myHealth = 4;
+    private int state = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +15,7 @@ public class PlaneBehaviour : MonoBehaviour
         Debug.Assert(myEnemyManager != null);
         // enemyCount is increased here
         myEnemyManager.increaseEnemyCount();
+        state = Random.Range(0, 6);
     }
 
     // Update is called once per frame
@@ -38,12 +40,20 @@ public class PlaneBehaviour : MonoBehaviour
 
     void Update()
     {
-        
-        string waypointName = "Waypoint1"; // TODO get name based on the state machine
-        Vector3 targetPosition = getTargetWaypointPosition(waypointName);
-        // TODO state machine updates
-
-        flyTowardsWaypoint(targetPosition);
+        GameObject target = GameObject.Find("WayPoint" + state);
+        Debug.Assert(target != null);
+        Vector3 targetPos = target.transform.position;
+        float dis = Vector3.Distance(transform.position, targetPos);
+        if (dis < 10f)
+            if (myEnemyManager.isRandomMode)
+                state = Random.Range(0, 6);
+            else
+                state = (state + 1) % 6;
+        target = GameObject.Find("WayPoint" + state);
+        targetPos = target.transform.position;
+        // Vector3 dir = targetPos - transform.position;
+        // dir.Normalize();
+        // transform.position += dir * 10f * Time.smoothDeltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

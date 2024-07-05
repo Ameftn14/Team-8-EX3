@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CoolDownBar : MonoBehaviour
 {
-    public float mSecToCoolDown = 1f;
+    public float mSecToCoolDown = 0.2f;
     private float mLastTriggered = 0f;
     private bool mActive = false;
     private float mInitBarWidth = 0f;
@@ -17,6 +17,9 @@ public class CoolDownBar : MonoBehaviour
         mInitBarWidth = r.sizeDelta.x;  // This is the width of the Rect Transform
 
         mLastTriggered = Time.time; // time last triggered
+        Vector2 s = GetComponent<RectTransform>().sizeDelta;
+        s.x = 0f;
+        GetComponent<RectTransform>().sizeDelta = s;
     }
 
     // Update is called once per frame
@@ -34,7 +37,7 @@ public class CoolDownBar : MonoBehaviour
         if (sec < 0)
         {
             mActive = false;
-            percentage = 1.0f;
+            percentage = 0f;
         }
             
         Vector2 s = GetComponent<RectTransform>().sizeDelta;

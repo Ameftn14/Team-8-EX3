@@ -17,9 +17,33 @@ public class PlaneBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
+    Vector3 getTargetWaypointPosition(string waypointName) {
+        GameObject waypoint = GameObject.Find(waypointName);
+        return waypoint.transform.localPosition;
+    }
+
+    void flyTowardsWaypoint(Vector3 targetPosition) {
+        // configs: {
+        float speed = 20.0f;
+        float rotationSpeed = 0.5f;
+        // }
+
+        // lerp towards the target position
+        Vector3 direction = targetPosition - transform.localPosition;
+        transform.up = Vector3.LerpUnclamped(transform.up, direction, rotationSpeed * Time.smoothDeltaTime);
+
+        // move the plane towards the target position
+        transform.localPosition += transform.up * speed * Time.smoothDeltaTime;
+    }
+
     void Update()
     {
+        
+        string waypointName = "Waypoint1"; // TODO get name based on the state machine
+        Vector3 targetPosition = getTargetWaypointPosition(waypointName);
+        // TODO state machine updates
 
+        flyTowardsWaypoint(targetPosition);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

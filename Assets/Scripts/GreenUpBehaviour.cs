@@ -61,7 +61,7 @@ public class GreenUpBehaviour : MonoBehaviour
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             transform.Rotate(transform.forward, -myHeroRotationSpeed * Time.smoothDeltaTime);
 
-        if (Input.GetKey(KeyCode.Space) && myEggManager.isColdDown())
+        if (Input.GetKey(KeyCode.Space))
             myEggManager.createEgg(this);
     }
 

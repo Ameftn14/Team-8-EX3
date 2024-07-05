@@ -21,6 +21,7 @@ public class PlaneBehaviour : MonoBehaviour
     // Update is called once per frame
     Vector3 getTargetWaypointPosition(string waypointName) {
         GameObject waypoint = GameObject.Find(waypointName);
+        Debug.Assert(waypoint != null);
         return waypoint.transform.localPosition;
     }
 
@@ -40,20 +41,23 @@ public class PlaneBehaviour : MonoBehaviour
 
     void Update()
     {
-        GameObject target = GameObject.Find("WayPoint" + state);
-        Debug.Assert(target != null);
-        Vector3 targetPos = target.transform.position;
+        // state machine update
+        string waypointName = "WayPoint" + state;
+        Vector3 targetPos = getTargetWaypointPosition(waypointName);
+
         float dis = Vector3.Distance(transform.position, targetPos);
         if (dis < 10f)
             if (myEnemyManager.isRandomMode)
                 state = Random.Range(0, 6);
             else
                 state = (state + 1) % 6;
-        target = GameObject.Find("WayPoint" + state);
-        targetPos = target.transform.position;
-        // Vector3 dir = targetPos - transform.position;
-        // dir.Normalize();
-        // transform.position += dir * 10f * Time.smoothDeltaTime;
+
+        // get current target
+        waypointName = "WayPoint" + state;
+        targetPos = getTargetWaypointPosition(waypointName);
+
+        // fly towards the target
+        flyTowardsWaypoint(targetPos);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -18,7 +18,7 @@ public class CoolDownBar : MonoBehaviour
 
         mLastTriggered = Time.time; // time last triggered
         Vector2 s = GetComponent<RectTransform>().sizeDelta;
-        s.x = 0f;
+        s.x = 0;
         GetComponent<RectTransform>().sizeDelta = s;
     }
 

@@ -44,7 +44,7 @@ public class PlaneBehaviour : MonoBehaviour
         Vector3 targetPos = getTargetWaypointPosition(waypointName);
         float dis = Vector3.Distance(transform.position, targetPos);
         if (dis < 25.0f)
-            if (myEnemyManager.isRandomMode)
+            if (myEnemyManager.getIsRandomMode())
                 state = Random.Range(0, 6);
             else
                 state = (state + 1) % 6;

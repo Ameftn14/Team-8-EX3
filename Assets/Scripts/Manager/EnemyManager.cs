@@ -7,7 +7,7 @@ public class EnemyManager : MonoBehaviour
     public int enemyExistMax = 10;
     private int enemyCount = 0;
     private int enemyDestroyed = 0;
-    public bool isRandomMode = false;
+    private bool isRandomMode = false;
     public void increaseEnemyCount()
     {
         enemyCount++;
@@ -20,6 +20,19 @@ public class EnemyManager : MonoBehaviour
     public int getEnemyCount()
     {
         return enemyCount;
+    }
+
+    public bool getIsRandomMode()
+    {
+        return isRandomMode;
+    }
+
+    public string getEnemyMode()
+    {
+        if (isRandomMode)
+            return "Random";
+        else
+            return "Sequential";
     }
 
     public int getEnemyDestroyed()

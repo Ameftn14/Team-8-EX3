@@ -29,7 +29,8 @@ public class TextManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "\tHERO: Drive(" + myHeroBehaviour.driveBy() + ") TouchedEnemy(" + myHeroBehaviour.getTouchedEnemyCount() + ")" +
+        text.text = "\tWAYPOINT:(" + myEnemyManager.getEnemyMode() + ")" +
+                    "\tHERO: Drive(" + myHeroBehaviour.driveBy() + ") TouchedEnemy(" + myHeroBehaviour.getTouchedEnemyCount() + ")" +
                     "\tEGG: OnScreen(" + myEggManager.getEggCount() + ")" +
                     "\tENEMY: Count(" + myEnemyManager.getEnemyCount() + ") Destroyed(" + myEnemyManager.getEnemyDestroyed() + ")";
     }

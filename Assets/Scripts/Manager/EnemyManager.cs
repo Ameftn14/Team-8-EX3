@@ -7,6 +7,7 @@ public class EnemyManager : MonoBehaviour
     public int enemyExistMax = 10;
     private int enemyCount = 0;
     private int enemyDestroyed = 0;
+    public bool isRandomMode = false;
     public void increaseEnemyCount()
     {
         enemyCount++;
@@ -50,5 +51,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (enemyCount < enemyExistMax)
             createEnemy();
+        if (Input.GetKeyDown(KeyCode.J))
+            isRandomMode = !isRandomMode;
     }
 }

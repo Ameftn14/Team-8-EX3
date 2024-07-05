@@ -28,7 +28,7 @@ public class PlaneBehaviour : MonoBehaviour
     void flyTowardsWaypoint(Vector3 targetPosition) {
         // configs: {
         float speed = 20.0f;
-        float rotationSpeed = 0.5f;
+        float rotationSpeed = 0.03f;
         // }
 
         // lerp towards the target position
@@ -39,19 +39,18 @@ public class PlaneBehaviour : MonoBehaviour
         transform.localPosition += transform.up * speed * Time.smoothDeltaTime;
     }
 
-    void Update()
-    {
+    void Update() {
         string waypointName = "WayPoint" + state;
         Vector3 targetPos = getTargetWaypointPosition(waypointName);
         float dis = Vector3.Distance(transform.position, targetPos);
-        if (dis < 10f)
+        if (dis < 25.0f)
             if (myEnemyManager.isRandomMode)
                 state = Random.Range(0, 6);
             else
                 state = (state + 1) % 6;
         targetPos = getTargetWaypointPosition("WayPoint" + state); 
         flyTowardsWaypoint(targetPos);
-            }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
